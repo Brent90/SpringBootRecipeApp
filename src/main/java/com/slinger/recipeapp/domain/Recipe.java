@@ -32,4 +32,7 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)  //delete a recipe then delete recipe notes
     Notes notes;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    Set<Ingredient> ingredients = new HashSet<>();
+
 }
