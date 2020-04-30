@@ -17,8 +17,7 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //todo make Difficulty enum
-    //private Difficulty difficulty;
+    private Difficulty difficulty;
     private Byte[] image;
 
 }
