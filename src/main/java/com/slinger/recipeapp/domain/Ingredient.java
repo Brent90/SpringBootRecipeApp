@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -22,5 +19,8 @@ public class Ingredient {
 
     private String description;
     private BigDecimal amount;
+
+    @OneToOne(fetch = FetchType.EAGER) // load all uoms
+    private UnitOfMeasure uom;
 
 }

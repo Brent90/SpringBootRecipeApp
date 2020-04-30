@@ -3,11 +3,11 @@ package com.slinger.recipeapp.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.engine.internal.Cascade;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -28,5 +28,8 @@ public class Recipe {
     private String directions;
     private Difficulty difficulty;
     private Byte[] image;
+
+    @OneToOne(cascade = CascadeType.ALL)  //delete a recipe then delete recipe notes
+    Notes notes;
 
 }
