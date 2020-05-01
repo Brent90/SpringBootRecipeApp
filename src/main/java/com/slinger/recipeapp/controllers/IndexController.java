@@ -5,6 +5,7 @@ import com.slinger.recipeapp.repositories.RecipeRepository;
 import com.slinger.recipeapp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.HashSet;
@@ -21,13 +22,8 @@ public class IndexController {
     }
 
     @GetMapping({"", "/", "/index", "index.html"})
-    public String showIndexPage() {
-        Set<Recipe> recipes = new HashSet<>();
-
-        recipeService.getRecipes().stream().forEach(recipe -> {
-            log.debug(recipe.getDescription());
-        });
-
+    public String showIndexPage(Model model) {
+        model.addAttribute("recipes", recipeService.getRecipes());
         return "index";
     }
 
