@@ -23,7 +23,14 @@ public class Ingredient {
     @OneToOne(fetch = FetchType.EAGER) // load all uoms
     private UnitOfMeasure uom;
 
-    @ManyToOne // do not apply cascade to this... if you delete an ingredient doesn't make sense to delete a recipe
+    @ManyToOne// do not apply cascade to this... if you delete an ingredient doesn't make sense to delete a recipe
     Recipe recipe;
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+    }
+
 
 }

@@ -3,7 +3,6 @@ package com.slinger.recipeapp.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,7 +24,11 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
+
+    @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
     private Byte[] image;
 
@@ -40,5 +43,19 @@ public class Recipe {
          joinColumns = @JoinColumn(name = "recipe_id"),
         inverseJoinColumns = @JoinColumn(name = "category_id")) //do not apply cascade to this
     Set<Category> categories = new HashSet<>();
+
+    //helper methods for bidirectional
+    public void setNotes(Notes notes) {
+        if(notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
+    }
+
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
 
 }
