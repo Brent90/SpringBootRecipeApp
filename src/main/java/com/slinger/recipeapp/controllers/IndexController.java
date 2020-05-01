@@ -2,6 +2,7 @@ package com.slinger.recipeapp.controllers;
 
 import com.slinger.recipeapp.domain.Recipe;
 import com.slinger.recipeapp.repositories.RecipeRepository;
+import com.slinger.recipeapp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,19 +14,19 @@ import java.util.Set;
 @Controller
 public class IndexController {
 
-    private final RecipeRepository recipeRepository;
+    private final RecipeService recipeService;
 
-    public IndexController(RecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @GetMapping({"", "/", "/index", "index.html"})
     public String showIndexPage() {
         Set<Recipe> recipes = new HashSet<>();
-        recipeRepository.findAll().iterator().forEachRemaining(recipes::add);
 
-        log.debug(recipeRepository.findById(1L).get().getDescription());
-
+        recipeService.getRecipes().stream().forEach(recipe -> {
+            log.debug(recipe.getDescription());
+        });
 
         return "index";
     }
