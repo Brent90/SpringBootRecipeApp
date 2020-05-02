@@ -16,37 +16,78 @@
             th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
 
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <style th:remove="all">
+        .card-style {
+            width: 85%;
+            margin: auto;
+        }
+
+        .card-header {
+            color: floralwhite;
+        }
+    </style>
+
 </head>
 <body>
 
+
 <div class="container mt-5">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Description</th>
-            </tr>
-        </thead>
+    <div class="card border-primary card-style">
 
-        <tbody>
-            <tr th:remove="all">
-                <td>1</td>
-                <td>Quick Pizza</td>
-            </tr>
-            <tr th:remove="all">
-                <td>2</td>
-                <td>Chicken Diner</td>
-            </tr>
+        <h5 class="card-header bg-primary">
+            <span th:text="'My Recipes'">My Recipes</span>
+            <!--  todo add new recipe functionality-->
+            <span class="float-right"><a href=""  style="color:floralwhite">New Recipe</a></span>
+        </h5>
 
-            <tr th:each="recipe : ${recipes}">
-                <td th:text="${recipe.id}"></td>
-                <td th:text="${recipe.description}"></td>
-            </tr>
 
-        </tbody>
+        <div class="card-body">
+            <table class="table">
+                <thead class="table-borderless">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">View</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
 
-    </table>
+                <tbody>
+                <tr th:remove="all">
+                    <td>1</td>
+                    <td>Quick Pizza</td>
+                    <td>View</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+                <tr th:remove="all">
+                    <td>2</td>
+                    <td>Chicken Diner</td>
+                    <td>View</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+
+                <tr th:each="recipe : ${recipes}">
+                    <td th:text="${recipe.id}"></td>
+                    <td th:text="${recipe.description}"></td>
+                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}" th:text="View"></a></td>
+                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}" th:text="Update"></a></td>
+                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}" th:text="Delete"></a></td>
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
 </div>
+
+
 
 </body>
 </html>
