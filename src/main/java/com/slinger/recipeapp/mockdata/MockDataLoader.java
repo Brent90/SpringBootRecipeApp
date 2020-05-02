@@ -168,16 +168,15 @@ public class MockDataLoader implements CommandLineRunner {
 
         chickenNachos.setNotes(chickenNachoNotes);
 
-        chickenNachos.getIngredients().add(new Ingredient("skinless chicken breast", new BigDecimal(".5"), poundUom));
-        chickenNachos.getIngredients().add(new Ingredient("salt", new BigDecimal(1), teaSpoonUom));
-        chickenNachos.getIngredients().add(new Ingredient("blue corn tortilla chips", new BigDecimal(14), ounceUom));
-        chickenNachos.getIngredients().add(new Ingredient(" pepper jack or monterey jack ", new BigDecimal(1), poundUom));
-        chickenNachos.getIngredients().add(new Ingredient("cornstarch", new BigDecimal(1), tableSpoonUom));
-        chickenNachos.getIngredients().add(new Ingredient("heavy cream", new BigDecimal(".5"), cupsUom));
-        chickenNachos.getIngredients().add(new Ingredient("milk", new BigDecimal(".5"), cupsUom));
-        chickenNachos.getIngredients().add(new Ingredient("fresh tomato salsa", new BigDecimal(1), cupsUom));
-        chickenNachos.getIngredients().add(new Ingredient("fresh cilantro", new BigDecimal(".5"), cupsUom));
-
+        chickenNachos.addIngredient(new Ingredient("skinless chicken breast", new BigDecimal(".5"), poundUom));
+        chickenNachos.addIngredient(new Ingredient("salt", new BigDecimal(1), teaSpoonUom));
+        chickenNachos.addIngredient(new Ingredient("blue corn tortilla chips", new BigDecimal(14), ounceUom));
+        chickenNachos.addIngredient(new Ingredient(" pepper jack or monterey jack ", new BigDecimal(1), poundUom));
+        chickenNachos.addIngredient(new Ingredient("cornstarch", new BigDecimal(1), tableSpoonUom));
+        chickenNachos.addIngredient(new Ingredient("heavy cream", new BigDecimal(".5"), cupsUom));
+        chickenNachos.addIngredient(new Ingredient("milk", new BigDecimal(".5"), cupsUom));
+        chickenNachos.addIngredient(new Ingredient("fresh tomato salsa", new BigDecimal(1), cupsUom));
+        chickenNachos.addIngredient(new Ingredient("fresh cilantro", new BigDecimal(".5"), cupsUom));
 
         recipes.add(chickenNachos);
 
@@ -232,15 +231,15 @@ public class MockDataLoader implements CommandLineRunner {
 
         buttermilkPancakes.setNotes(buttermilkPancakeNotes);
 
-        buttermilkPancakes.getIngredients().add(new Ingredient("purpose flour", new BigDecimal(2), cupsUom));
-        buttermilkPancakes.getIngredients().add(new Ingredient("salt", new BigDecimal(".5"), teaSpoonUom));
-        buttermilkPancakes.getIngredients().add(new Ingredient("baking powder", new BigDecimal(".5"), teaSpoonUom));
-        buttermilkPancakes.getIngredients().add(new Ingredient("baking soda", new BigDecimal(".5"), teaSpoonUom));
-        buttermilkPancakes.getIngredients().add(new Ingredient("sugar", new BigDecimal(2), tableSpoonUom));
-        buttermilkPancakes.getIngredients().add(new Ingredient("large eggs", new BigDecimal(2), eachUom));
-        buttermilkPancakes.getIngredients().add(new Ingredient("buttermilk", new BigDecimal(".5"), cupsUom));
-        buttermilkPancakes.getIngredients().add(new Ingredient("milk", new BigDecimal(1), cupsUom));
-        buttermilkPancakes.getIngredients().add(new Ingredient("blueberries", new BigDecimal(1), cupsUom));
+        buttermilkPancakes.addIngredient(new Ingredient("purpose flour", new BigDecimal(2), cupsUom));
+        buttermilkPancakes.addIngredient(new Ingredient("salt", new BigDecimal(".5"), teaSpoonUom));
+        buttermilkPancakes.addIngredient(new Ingredient("baking powder", new BigDecimal(".5"), teaSpoonUom));
+        buttermilkPancakes.addIngredient(new Ingredient("baking soda", new BigDecimal(".5"), teaSpoonUom));
+        buttermilkPancakes.addIngredient(new Ingredient("sugar", new BigDecimal(2), tableSpoonUom));
+        buttermilkPancakes.addIngredient(new Ingredient("large eggs", new BigDecimal(2), eachUom));
+        buttermilkPancakes.addIngredient(new Ingredient("buttermilk", new BigDecimal(".5"), cupsUom));
+        buttermilkPancakes.addIngredient(new Ingredient("milk", new BigDecimal(1), cupsUom));
+        buttermilkPancakes.addIngredient(new Ingredient("blueberries", new BigDecimal(1), cupsUom));
 
         recipes.add(buttermilkPancakes);
 
@@ -255,7 +254,7 @@ public class MockDataLoader implements CommandLineRunner {
         basilPesto.setDifficulty(Difficulty.MEDIUM);
         basilPesto.setServings(1);
         basilPesto.setSource("simplyrecipes");
-        basilPesto.setUrl("https://www.simplyrecipes.com/recipes/fresh_basil_pesto/print/");
+        basilPesto.setUrl("https://www.simplyrecipes.com/recipes/fresh_basil_pesto/");
         basilPesto.getCategories().add(italianCategory);
 
         basilPesto.setDirections("1 Pulse basil and pine nuts in a food processor: Place the basil leaves and pine nuts into the bowl of a food processor and pulse a several times.\n" +
@@ -273,13 +272,13 @@ public class MockDataLoader implements CommandLineRunner {
 
         basilPesto.setNotes(basilPestoNotes);
 
-        basilPesto.getIngredients().add(new Ingredient("fresh basil leaves", new BigDecimal(2), cupsUom));
-        basilPesto.getIngredients().add(new Ingredient("grated romano", new BigDecimal(".5"), cupsUom));
-        basilPesto.getIngredients().add(new Ingredient("extra virgin olive oil", new BigDecimal(".5"), cupsUom));
-        basilPesto.getIngredients().add(new Ingredient("pine nuts", new BigDecimal(".5"), cupsUom));
-        basilPesto.getIngredients().add(new Ingredient("minced garlic cloves", new BigDecimal(3), teaSpoonUom));
-        basilPesto.getIngredients().add(new Ingredient("salt", new BigDecimal(1), teaSpoonUom));
-        basilPesto.getIngredients().add(new Ingredient("pepper", new BigDecimal(1), teaSpoonUom));
+        basilPesto.addIngredient(new Ingredient("fresh basil leaves", new BigDecimal(2), cupsUom));
+        basilPesto.addIngredient(new Ingredient("grated romano", new BigDecimal(".5"), cupsUom));
+        basilPesto.addIngredient(new Ingredient("extra virgin olive oil", new BigDecimal(".5"), cupsUom));
+        basilPesto.addIngredient(new Ingredient("pine nuts", new BigDecimal(".5"), cupsUom));
+        basilPesto.addIngredient(new Ingredient("minced garlic cloves", new BigDecimal(3), teaSpoonUom));
+        basilPesto.addIngredient(new Ingredient("salt", new BigDecimal(1), teaSpoonUom));
+        basilPesto.addIngredient(new Ingredient("pepper", new BigDecimal(1), teaSpoonUom));
 
         recipes.add(basilPesto);
 
