@@ -7,6 +7,7 @@ import com.slinger.recipeapp.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import sun.util.resources.et.CalendarData_et;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -121,10 +122,24 @@ public class MockDataLoader implements CommandLineRunner {
             throw new RuntimeException("Expected Category Not Found");
         }
 
+        Optional<Category> chineseCategoryOptional = categoryRepository.findByDescription("Chinese");
+
+        if(!chineseCategoryOptional.isPresent()) {
+            throw new RuntimeException("Expected Category Not Found");
+        }
+
+        Optional<Category> otherCategoryOptional = categoryRepository.findByDescription("Other");
+
+        if(!otherCategoryOptional.isPresent()) {
+            throw new RuntimeException("Expected Category Not Found");
+        }
+
         Category americanCategory = americanCategoryOptional.get();
         Category mexicanCategory = mexicanCategoryOptional.get();
         Category italianCategory = italianCategoryOptional.get();
         Category frenchCategory = frenchCategoryOptional.get();
+        Category chineseCategory = chineseCategoryOptional.get();
+        Category otherCategory = otherCategoryOptional.get();
 
 
         //////////////////////// START OF RECIPE: Blue Corn Chicken Nachos /////////////////////////////////

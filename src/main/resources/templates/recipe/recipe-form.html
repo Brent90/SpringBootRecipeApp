@@ -34,7 +34,7 @@
 <!--RECIPE DESCRIPTION -->
 <div class="container mt-5" >
 
-<form action="#" >
+<form action="#" th:object="${recipe}" th:action="@{/recipe/}" method="post">
 
     <div class="card border-primary card-style" style="width: 82% !important;">
 
@@ -51,8 +51,9 @@
                 <div class="col-md-4">
                     <div class="p-2">
                         <h5>Description</h5>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" th:field="*{description}">
                     </div>
+
 
                     <div class="p-2 mt-4">
                         <h5>Categories</h5>
@@ -60,6 +61,16 @@
                             <input type="checkbox"> Category 1
                             <input type="checkbox"> Category 2
                         </div>
+
+<!--                        TODO STYLE THIS BETTER-->
+                        <th:block th:each="tempCategory, i : ${categories}">
+                            <th:block th:if="${i.index} == 3">
+                                <br>
+                            </th:block>
+
+                            <input type="checkbox" name="checkedCategory" th:value="${tempCategory.id}">
+                            <label th:text="${tempCategory.description}"></label>
+                        </th:block>
                     </div>
 
 
@@ -77,12 +88,12 @@
             <div class="row mt-4">
                 <div class="col-md-4 p-2">
                     <h5>Prep Time</h5>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" th:field="*{prepTime}">
                 </div>
 
                 <div class="col-md-4 p-2">
                     <h5>Cook Time</h5>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" th:field="*{cookTime}">
                 </div>
 
                 <div class="col-md-4 p-2">
@@ -91,6 +102,15 @@
                         <option>Easy</option>
                         <option>Medium</option>
                         <option>Hard</option>
+                    </select>
+
+                    <select class="form-control" th:field="*{difficulty}">
+                        <option
+                                th:each="difficultyValue : ${T(com.slinger.recipeapp.domain.Difficulty).values()}"
+                                th:value="${difficultyValue.name()}"
+                                th:text="${difficultyValue}">
+
+                        </option>
                     </select>
 
                     
@@ -104,17 +124,17 @@
             <div class="row mb-2 mt-3">
                 <div class="col-md-4 p-2">
                     <h5>Servings</h5>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" th:field="*{servings}">
                 </div>
 
                 <div class="col-md-4 p-2">
                     <h5>Source</h5>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" th:field="*{source}">
                 </div>
 
                 <div class="col-md-4 p-2">
                     <h5>Url</h5>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" th:field="*{url}">
                 </div>
             </div>
 
@@ -123,23 +143,23 @@
     </div>
 
 
-
+<!--TODO ADD INGREDIENT FUNCTIONALITY -->
 
 <!--RECIPE INGREDIENTS-->
 <div class="container mt-5">
     <div class="card border-primary card-style">
         <h5 class="card-header bg-primary">Ingredients</h5>
-            <div class="card-body">
+            <div class="card-body" th:object="${ingredient}">
 
                 <div class="row mt-1 mb-2 text-center">
                     <div class="col-md-3 p-2">
                         <h5>Description:</h5>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" th:field="*{description}">
                     </div>
 
                     <div class="col-md-3 p-2">
                         <h5>Amount:</h5>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" th:field="*{amount}">
                     </div>
 
 
@@ -150,6 +170,14 @@
                             <option>Each</option>
                             <option>Cup</option>
                             <option>Ounce</option>
+                        </select>
+
+                        <select class="form-control" name="uom.id">
+                            <option
+                                    th:each="uomTemp : ${uomList}"
+                                    th:value="${uomTemp.id}"
+                                    th:text="${uomTemp.description}">
+                            </option>
                         </select>
 
 
@@ -185,7 +213,7 @@
 <div class="container mt-5">
     <div class="card border-primary card-style">
         <h5 class="card-header bg-primary">Directions</h5>
-        <textarea name="directions" id="directions" cols="30" rows="10"></textarea>
+        <textarea name="directions" id="directions" cols="30" rows="10" th:field="*{directions}"></textarea>
     </div>
 </div>
 
@@ -194,7 +222,7 @@
 <div class="container mt-5 mb-5">
     <div class="card border-primary card-style">
         <h5 class="card-header bg-primary">Notes</h5>
-        <textarea name="notes" id="notes" cols="30" rows="10"></textarea>
+        <textarea name="notes" id="notes" cols="30" rows="10" th:field="*{notes}"></textarea>
     </div>
 </div>
 
