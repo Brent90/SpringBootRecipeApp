@@ -38,7 +38,7 @@ class IngredientCommandToIngredientTest {
         //given
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setId(INGREDIENT_ID);
-        ingredientCommand.setDescription(DESCRIPTION);
+        ingredientCommand.setIngredientDescription(DESCRIPTION);
         ingredientCommand.setAmount(AMOUNT);
 
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
@@ -51,7 +51,7 @@ class IngredientCommandToIngredientTest {
         //then
         assertNotNull(ingredient);
         assertEquals(INGREDIENT_ID, ingredient.getId());
-        assertEquals(DESCRIPTION, ingredient.getDescription());
+        assertEquals(DESCRIPTION, ingredient.getIngredientDescription());
         assertEquals(AMOUNT, ingredient.getAmount());
         assertEquals(UOM_ID, ingredient.getUom().getId());
     }
@@ -61,7 +61,7 @@ class IngredientCommandToIngredientTest {
         //given
         IngredientCommand ingredientCommand = new IngredientCommand();
         ingredientCommand.setId(INGREDIENT_ID);
-        ingredientCommand.setDescription(DESCRIPTION);
+        ingredientCommand.setIngredientDescription(DESCRIPTION);
         ingredientCommand.setAmount(AMOUNT);
 
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
@@ -77,7 +77,7 @@ class IngredientCommandToIngredientTest {
         assertNotNull(ingredient);
         assertNull(ingredient.getUom());
         assertEquals(INGREDIENT_ID, ingredient.getId());
-        assertEquals(DESCRIPTION, ingredient.getDescription());
+        assertEquals(DESCRIPTION, ingredient.getIngredientDescription());
         assertEquals(AMOUNT, ingredient.getAmount());
     }
 

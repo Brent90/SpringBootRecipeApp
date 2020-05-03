@@ -151,7 +151,7 @@
                     <li th:remove="all" class="list-group-item">Ingredient 8</li>
 
                     <li th:each="ingredient : ${recipe.ingredients}"
-                        th:text="${ingredient.amount + ' ' + ingredient.uom.description + ' ' + ingredient.description}"
+                        th:text="${ingredient.amount + ' ' + ingredient.uom.description + ' ' + ingredient.ingredientDescription}"
                         class="list-group-item">
                     </li>
                 </ul>

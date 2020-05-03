@@ -17,7 +17,7 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String description;
+    private String ingredientDescription;
     private BigDecimal amount;
 
     @OneToOne(fetch = FetchType.EAGER) // load all uoms
@@ -26,8 +26,8 @@ public class Ingredient {
     @ManyToOne// do not apply cascade to this... if you delete an ingredient doesn't make sense to delete a recipe
     Recipe recipe;
 
-    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
-        this.description = description;
+    public Ingredient(String ingredientDescription, BigDecimal amount, UnitOfMeasure uom) {
+        this.ingredientDescription = ingredientDescription;
         this.amount = amount;
         this.uom = uom;
     }

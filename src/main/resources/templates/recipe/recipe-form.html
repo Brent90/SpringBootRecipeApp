@@ -46,23 +46,29 @@
 
 
         <div class="card-body">
-            <!--  DESCRIPTION, CATEGORIES AND IMAGE-->
+            <!--  DESCRIPTION CATEGORIES AND IMAGE-->
             <div class="row">
                 <div class="col-md-4">
                     <div class="p-2">
                         <h5>Description</h5>
-                        <input type="text" class="form-control" th:field="*{description}">
+                        <label>
+                            <input type="text" class="form-control" th:field="*{description}">
+                        </label>
                     </div>
 
 
                     <div class="p-2 mt-4">
                         <h5>Categories</h5>
                         <div th:remove="all">
-                            <input type="checkbox"> Category 1
-                            <input type="checkbox"> Category 2
+                            <label>
+                                <input type="checkbox">
+                            </label> Category 1
+                            <label>
+                                <input type="checkbox">
+                                Category 2
+                            </label>
                         </div>
 
-<!--                        TODO STYLE THIS BETTER-->
                         <th:block th:each="tempCategory, i : ${categories}">
                             <th:block th:if="${i.index} == 3">
                                 <br>
@@ -110,6 +116,7 @@
                                 th:value="${difficultyValue.name()}"
                                 th:text="${difficultyValue}">
 
+
                         </option>
                     </select>
 
@@ -154,7 +161,7 @@
                 <div class="row mt-1 mb-2 text-center">
                     <div class="col-md-3 p-2">
                         <h5>Description:</h5>
-                        <input type="text" class="form-control" th:field="*{description}">
+                        <input type="text" class="form-control" th:field="*{ingredientDescription}"/>
                     </div>
 
                     <div class="col-md-3 p-2">
@@ -172,11 +179,12 @@
                             <option>Ounce</option>
                         </select>
 
-                        <select class="form-control" name="uom.id">
+                        <select class="form-control" name="uom.id" id="uom">
                             <option
                                     th:each="uomTemp : ${uomList}"
                                     th:value="${uomTemp.id}"
-                                    th:text="${uomTemp.description}">
+                                    th:text="${uomTemp.description}"
+                                    th:selected="${uomTemp.id.equals(ingredient.id)}">
                             </option>
                         </select>
 
@@ -185,7 +193,7 @@
 
                     <div class="col-md-3 p-2">
                         <h5>Add:</h5>
-                        <button type="button" class="btn btn-primary">Add Ingredient</button>
+                        <button type="button" onclick="addIngredient()"  class="btn btn-primary">Add Ingredient</button>
                     </div>
                 </div>
 
@@ -222,7 +230,7 @@
 <div class="container mt-5 mb-5">
     <div class="card border-primary card-style">
         <h5 class="card-header bg-primary">Notes</h5>
-        <textarea name="notes" id="notes" cols="30" rows="10" th:field="*{notes}"></textarea>
+        <textarea name="notes" id="notes" cols="30" rows="10" th:field="*{notes.recipeNotes}"></textarea>
     </div>
 </div>
 
@@ -235,6 +243,16 @@
 </form>
 
 </div>
+
+<script>
+    console.log('hi brent');
+
+    function addIngredient() {
+        let uom = document.getElementById("uom");
+        console.log(uom.value);
+    }
+
+</script>
 
 
 </body>

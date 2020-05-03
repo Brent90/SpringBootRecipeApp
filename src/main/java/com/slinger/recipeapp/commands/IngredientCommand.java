@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class IngredientCommand {
     private Long id;
-    private String description;
+    private String ingredientDescription;
     private BigDecimal amount;
     private UnitOfMeasureCommand uom;
 }
