@@ -100,7 +100,8 @@
                     <h5>URL:</h5>
                 </div>
                 <div class="col-md-3">
-                    <p><a target="_blank" href="#" th:href="${recipe.url}">View Original</a></p>
+                    <!-- todo this no binding right  -->
+                    <p><a th:href="@{recipe.url}">View Original</a></p>
                 </div>
             </div>
 
@@ -110,7 +111,7 @@
 
 
 <!--RECIPE CATEGORIES-->
-<div class="container mt-5" th:if="${recipe.categories.size()} > 0">
+<div class="container mt-5">
     <div class="card border-primary card-style">
         <h5 class="card-header bg-primary">Categories</h5>
 

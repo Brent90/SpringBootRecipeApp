@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Form</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+
+    <script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.0.0.slim.min.js"
+            th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+    <script crossorigin="anonymous" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <style th:remove="all">
+        .card-style {
+            width: 85%;
+            margin: auto;
+        }
+
+        .card-header {
+            color: floralwhite;
+        }
+    </style>
+
+</head>
+<body>
+<!--RECIPE DESCRIPTION -->
+<div class="container mt-5" >
+
+<form action="#" >
+
+    <div class="card border-primary card-style" style="width: 82% !important;">
+
+        <h5 class="card-header bg-primary">
+            <span>Edit Recipe</span>
+            <!--  todo add upload image functionality-->
+            <span class="float-right"><a href=""  style="color:floralwhite">Upload Image</a></span>
+        </h5>
+
+
+        <div class="card-body">
+            <!--  DESCRIPTION, CATEGORIES AND IMAGE-->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="p-2">
+                        <h5>Description</h5>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div class="p-2 mt-4">
+                        <h5>Categories</h5>
+                        <div th:remove="all">
+                            <input type="checkbox"> Category 1
+                            <input type="checkbox"> Category 2
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-8 text-md-right">
+                    <img src="../../static/images/holder.png" th:src="@{/images/holder.png}"
+                         alt="holder image" width="500" height="250" class="img-fluid p-2"
+                         style="height: 250px !important;">
+                </div>
+            </div>
+
+
+<!--            PREP TIME, COOK TIME, DIFFICULTY-->
+            <div class="row mt-4">
+                <div class="col-md-4 p-2">
+                    <h5>Prep Time</h5>
+                    <input type="text" class="form-control">
+                </div>
+
+                <div class="col-md-4 p-2">
+                    <h5>Cook Time</h5>
+                    <input type="text" class="form-control">
+                </div>
+
+                <div class="col-md-4 p-2">
+                    <h5>Difficulty</h5>
+                    <select class="form-control" th:remove="all">
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                    </select>
+
+                    
+                </div>
+            </div>
+
+
+
+
+            <!--   SERVINGS, SOURCE, URL-->
+            <div class="row mb-2 mt-3">
+                <div class="col-md-4 p-2">
+                    <h5>Servings</h5>
+                    <input type="text" class="form-control">
+                </div>
+
+                <div class="col-md-4 p-2">
+                    <h5>Source</h5>
+                    <input type="text" class="form-control">
+                </div>
+
+                <div class="col-md-4 p-2">
+                    <h5>Url</h5>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+<!--RECIPE INGREDIENTS-->
+<div class="container mt-5">
+    <div class="card border-primary card-style">
+        <h5 class="card-header bg-primary">Ingredients</h5>
+            <div class="card-body">
+
+                <div class="row mt-1 mb-2 text-center">
+                    <div class="col-md-3 p-2">
+                        <h5>Description:</h5>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div class="col-md-3 p-2">
+                        <h5>Amount:</h5>
+                        <input type="text" class="form-control">
+                    </div>
+
+
+
+                    <div class="col-md-3 p-2">
+                        <h5>UOM:</h5>
+                        <select th:remove="all" class="form-control">
+                            <option>Each</option>
+                            <option>Cup</option>
+                            <option>Ounce</option>
+                        </select>
+
+
+                    </div>
+
+                    <div class="col-md-3 p-2">
+                        <h5>Add:</h5>
+                        <button type="button" class="btn btn-primary">Add Ingredient</button>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+                    <ul class="list-group">
+                        <li th:remove="all" class="list-group-item">Ingredient 1</li>
+                        <li th:remove="all" class="list-group-item">Ingredient 2</li>
+                        <li th:remove="all" class="list-group-item">Ingredient 3</li>
+                        <li th:remove="all" class="list-group-item">Ingredient 4</li>
+                        <li th:remove="all" class="list-group-item">Ingredient 5</li>
+                        <li th:remove="all" class="list-group-item">Ingredient 6</li>
+                        <li th:remove="all" class="list-group-item">Ingredient 7</li>
+                        <li th:remove="all" class="list-group-item">Ingredient 8</li>
+
+                    </ul>
+                </div>
+
+            </div>
+    </div>
+</div>
+
+
+<!--RECIPE DIRECTIONS-->
+<div class="container mt-5">
+    <div class="card border-primary card-style">
+        <h5 class="card-header bg-primary">Directions</h5>
+        <textarea name="directions" id="directions" cols="30" rows="10"></textarea>
+    </div>
+</div>
+
+
+<!--RECIPE NOTES-->
+<div class="container mt-5 mb-5">
+    <div class="card border-primary card-style">
+        <h5 class="card-header bg-primary">Notes</h5>
+        <textarea name="notes" id="notes" cols="30" rows="10"></textarea>
+    </div>
+</div>
+
+
+    <div class="container card-style mb-3">
+        <button type="submit" class="btn btn-primary">Add Recipe</button>
+    </div>
+
+
+</form>
+
+</div>
+
+
+</body>
+</html>

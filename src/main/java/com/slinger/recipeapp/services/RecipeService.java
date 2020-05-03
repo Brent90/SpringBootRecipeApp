@@ -1,5 +1,6 @@
 package com.slinger.recipeapp.services;
 
+import com.slinger.recipeapp.commands.RecipeCommand;
 import com.slinger.recipeapp.domain.Recipe;
 
 import java.util.Set;

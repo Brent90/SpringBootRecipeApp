@@ -44,6 +44,7 @@ public class Recipe {
         inverseJoinColumns = @JoinColumn(name = "category_id")) //do not apply cascade to this
     Set<Category> categories = new HashSet<>();
 
+
     //helper methods for bidirectional
     public void setNotes(Notes notes) {
         if(notes != null) {
