@@ -47,7 +47,7 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeOptional.get();
     }
 
-    @Override //TODO ADD TESTING FOR THIS
+    @Override
     @Transactional
     public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
         Recipe recipeHolder = recipeCommandToRecipe.convert(recipeCommand);
@@ -55,5 +55,8 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeToRecipeCommand.convert(savedRecipe);
     }
 
-
+    @Override
+    public RecipeCommand findByRecipeCommandId(Long recipeId) {
+        return recipeToRecipeCommand.convert(findById(recipeId));
+    }
 }

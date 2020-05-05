@@ -34,7 +34,7 @@
 <!--RECIPE DESCRIPTION -->
 <div class="container mt-5" >
 
-<form action="#" th:object="${recipe}" th:action="@{/recipe/}" method="post">
+<form action="#" id="form" th:object="${recipe}" th:action="@{/recipe/}" method="post">
 
     <div class="card border-primary card-style" style="width: 82% !important;">
 
@@ -161,32 +161,50 @@
                 <div class="row mt-1 mb-2 text-center">
                     <div class="col-md-3 p-2">
                         <h5>Description:</h5>
-                        <input type="text" class="form-control" th:field="*{ingredientDescription}"/>
+                        <input type="text" id="ingredient-description" class="form-control" th:field="*{ingredientDescription}"/>
                     </div>
 
                     <div class="col-md-3 p-2">
                         <h5>Amount:</h5>
-                        <input type="text" class="form-control" th:field="*{amount}">
+                        <input type="text" id="ingredient-amount" class="form-control" th:field="*{amount}">
                     </div>
-
 
 
                     <div class="col-md-3 p-2">
                         <h5>UOM:</h5>
-                        <select th:remove="all" class="form-control">
-                            <option>Each</option>
-                            <option>Cup</option>
-                            <option>Ounce</option>
-                        </select>
+<!--                        <select id="uom-list" class="form-control" >-->
+<!--                            <option value="ounce" >Ounce</option>-->
+<!--                            <option value="each">Each</option>-->
+<!--                            <option value="tablespoon">Tablespoon</option>-->
+<!--                            <option value="teaspoon">Teaspoon</option>-->
+<!--                            <option value="pinch">Pinch</option>-->
+<!--                            <option value="dash">Dash</option>-->
+<!--                            <option value="pound">Pound</option>-->
+<!--                            <option value="pint">Pint</option>-->
+<!--                            <option value="cup">Cup</option>-->
+<!--                        </select>-->
 
-                        <select class="form-control" name="uom.id" id="uom">
+                        <select class="form-control" name="uom.id" id="list">
                             <option
                                     th:each="uomTemp : ${uomList}"
                                     th:value="${uomTemp.id}"
                                     th:text="${uomTemp.description}"
-                                    th:selected="${uomTemp.id.equals(ingredient.id)}">
+                                    th:name="${uomTemp.description}"
+                                    th:selected="${uomTemp.id.equals(ingredient.id)}"
+                                    >
                             </option>
                         </select>
+
+
+
+<!--                        <th:block th:each="tempCategory, i : ${categories}">-->
+<!--                            <th:block th:if="${i.index} == 3">-->
+<!--                                <br>-->
+<!--                            </th:block>-->
+
+<!--                            <input type="checkbox" name="checkedCategory" th:value="${tempCategory.id}">-->
+<!--                            <label th:text="${tempCategory.description}"></label>-->
+<!--                        </th:block>-->
 
 
                     </div>
@@ -199,16 +217,9 @@
 
 
                 <div class="text-center">
-                    <ul class="list-group">
-                        <li th:remove="all" class="list-group-item">Ingredient 1</li>
+                    <ul class="list-group" id="ingredient-list">
                         <li th:remove="all" class="list-group-item">Ingredient 2</li>
                         <li th:remove="all" class="list-group-item">Ingredient 3</li>
-                        <li th:remove="all" class="list-group-item">Ingredient 4</li>
-                        <li th:remove="all" class="list-group-item">Ingredient 5</li>
-                        <li th:remove="all" class="list-group-item">Ingredient 6</li>
-                        <li th:remove="all" class="list-group-item">Ingredient 7</li>
-                        <li th:remove="all" class="list-group-item">Ingredient 8</li>
-
                     </ul>
                 </div>
 
@@ -245,12 +256,63 @@
 </div>
 
 <script>
-    console.log('hi brent');
+
+    ingredients = [];
+
+    $(document).ready(function () {
+
+        $("#form").submit(function (event) {
+
+            fire_ajax_submit();
+
+        });
+
+    });
+
 
     function addIngredient() {
-        let uom = document.getElementById("uom");
-        console.log(uom.value);
+
+        let uomList = document.getElementById("list").value;
+        let ingredientAmount = document.getElementById("ingredient-amount").value;
+        let ingredientDescription = document.getElementById("ingredient-description").value;
+
+        let uom = {"description" : "cup"}
+        let ingredient = {"ingredientDescription" : ingredientDescription, "amount" : ingredientAmount , "uom" : uom };
+
+
+
+        ingredients.push(ingredient);
+        console.log(ingredient);
+
+        let node = document.createElement("LI");
+        node.classList.add("list-group-item");
+
+        // let textNode = document.createTextNode(uomList);
+        let textNode = document.createTextNode(ingredient.amount + " " + ingredient.uom.description + " " + ingredient.ingredientDescription);
+
+        node.appendChild(textNode);
+        document.getElementById("ingredient-list").appendChild(node);
+
     }
+
+
+    function fire_ajax_submit() {
+        let uom = {"description" : "cup"}
+        let ingredient = {"ingredientDescription" : "sugar", "amount" : "3" , uom};
+
+
+        $.ajax({
+            type: "POST",
+            url: "/saveIngredients",
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify(ingredients),
+        });
+    }
+
+
+
+
 
 </script>
 

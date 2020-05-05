@@ -1,15 +1,18 @@
 package com.slinger.recipeapp.services;
 
+import com.slinger.recipeapp.commands.RecipeCommand;
 import com.slinger.recipeapp.converters.RecipeCommandToRecipe;
 import com.slinger.recipeapp.converters.RecipeToRecipeCommand;
 import com.slinger.recipeapp.domain.Recipe;
 import com.slinger.recipeapp.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,15 +22,17 @@ class RecipeServiceImplTest {
 
     @Mock
     RecipeRepository recipeRepository;
-    RecipeService recipeService;
+    @Mock
     RecipeToRecipeCommand recipeToRecipeCommand;
+    @Mock
     RecipeCommandToRecipe recipeCommandToRecipe;
+
+    RecipeServiceImpl recipeService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
         recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
-
     }
 
     @Test
@@ -54,4 +59,22 @@ class RecipeServiceImplTest {
         verify(recipeRepository, times(1)).findAll();
 
     }
+
+    @Test
+    void findById() {
+        Recipe recipe = new Recipe();
+        recipe.setId(10L);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe foundRecipe = recipeService.findById(10L);
+
+        assertNotNull(foundRecipe);
+        verify(recipeRepository, times(1)).findById(anyLong());
+    }
+
+
+
+
 }
