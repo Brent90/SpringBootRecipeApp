@@ -10,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -70,5 +68,22 @@ public class RecipeServiceImpl implements RecipeService {
         recipeCommand.getIngredients().forEach(temp -> temp.setRecipeId(recipeCommand.getId()));
         Recipe savedRecipe = recipeRepository.save(recipeCommandToRecipe.convert(recipeCommand));
         return recipeToRecipeCommand.convert(savedRecipe);
+    }
+
+    @Override
+    public List<Recipe> getRecipesSorted() {
+        return recipeRepository.findByOrderByDescriptionAsc();
+    }
+
+    @Override
+    public void deleteRecipeById(Long recipeId) {
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
+
+        if(!optionalRecipe.isPresent()) {
+            throw new RuntimeException("No recipe found with id " + recipeId);
+        }
+
+        recipeRepository.deleteById(recipeId);
+        log.debug("Deleted recipe with id: " + recipeId);
     }
 }

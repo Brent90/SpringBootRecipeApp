@@ -69,4 +69,13 @@ class RecipeControllerTest {
         verify(categoryRepository, times(1)).findAll();
         verify(unitOfMeasureService, times(1)).listAllUom();
     }
+
+    @Test
+    void deleteRecipeById() throws Exception {
+        mockMvc.perform(get("/recipe/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/"));
+
+        verify(recipeService, times(1)).deleteRecipeById(anyLong());
+    }
 }

@@ -75,6 +75,18 @@ class RecipeServiceImplTest {
     }
 
 
+    @Test
+    void deleteRecipeById() {
+        Recipe recipe = new Recipe();
+        recipe.setId(10L);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
 
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
 
+        Recipe foundRecipe = recipeService.findById(10L);
+
+        recipeService.deleteRecipeById(10L);
+        verify(recipeRepository, times(1)).deleteById(anyLong());
+
+    }
 }
