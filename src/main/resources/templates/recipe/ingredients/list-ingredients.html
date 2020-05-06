@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+
+    <script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.0.0.slim.min.js"
+            th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+    <script crossorigin="anonymous" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <style th:remove="all">
+        .card-style {
+            width: 85%;
+            margin: auto;
+        }
+
+        .card-header {
+            color: floralwhite;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div class="container mt-5">
+    <div class="card border-primary card-style">
+
+        <h5 class="card-header bg-primary">
+            <span th:text="'My Recipes'">Ingredients</span>
+            <span class="float-right"><a href=""  style="color:floralwhite">New Ingredient</a></span>
+        </h5>
+
+
+        <div class="card-body">
+            <table class="table">
+                <thead class="table-borderless">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">View</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:remove="all">
+                    <td>1</td>
+                    <td>2 Cup Flour</td>
+                    <td>View</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+                <tr th:remove="all">
+                    <td>2</td>
+                    <td>1 Tablespoon Salt</td>
+                    <td>View</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+
+<!--                todo add thymeleaf logic to loop through-->
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
