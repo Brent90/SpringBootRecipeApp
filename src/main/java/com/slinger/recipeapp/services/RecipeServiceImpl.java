@@ -1,5 +1,6 @@
 package com.slinger.recipeapp.services;
 
+import com.slinger.recipeapp.commands.IngredientCommand;
 import com.slinger.recipeapp.commands.RecipeCommand;
 import com.slinger.recipeapp.converters.RecipeCommandToRecipe;
 import com.slinger.recipeapp.converters.RecipeToRecipeCommand;
@@ -52,11 +53,22 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
         Recipe recipeHolder = recipeCommandToRecipe.convert(recipeCommand);
         Recipe savedRecipe = recipeRepository.save(recipeHolder);
+        log.debug("Saved recipe " + savedRecipe.getId());
         return recipeToRecipeCommand.convert(savedRecipe);
     }
 
     @Override
+    @Transactional
     public RecipeCommand findByRecipeCommandId(Long recipeId) {
         return recipeToRecipeCommand.convert(findById(recipeId));
+    }
+
+    @Override
+    @Transactional
+    public RecipeCommand saveIngredientToRecipe(RecipeCommand recipeCommand, IngredientCommand ingredientCommand) {
+        recipeCommand.getIngredients().add(ingredientCommand);
+        recipeCommand.getIngredients().forEach(temp -> temp.setRecipeId(recipeCommand.getId()));
+        Recipe savedRecipe = recipeRepository.save(recipeCommandToRecipe.convert(recipeCommand));
+        return recipeToRecipeCommand.convert(savedRecipe);
     }
 }

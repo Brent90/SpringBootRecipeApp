@@ -1,5 +1,6 @@
 package com.slinger.recipeapp.services;
 
+import com.slinger.recipeapp.commands.IngredientCommand;
 import com.slinger.recipeapp.commands.RecipeCommand;
 import com.slinger.recipeapp.domain.Recipe;
 
@@ -14,5 +15,7 @@ public interface RecipeService {
     RecipeCommand findByRecipeCommandId(Long recipeId);
 
     RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand);
+
+    RecipeCommand saveIngredientToRecipe(RecipeCommand recipeCommand, IngredientCommand ingredientCommand);
 
 }

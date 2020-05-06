@@ -36,6 +36,8 @@
 
 <form action="#" id="form" th:object="${recipe}" th:action="@{/recipe/}" method="post">
 
+    <input type="hidden" th:field="*{id}">
+
     <div class="card border-primary card-style" style="width: 82% !important;">
 
         <h5 class="card-header bg-primary">
@@ -69,14 +71,17 @@
                             </label>
                         </div>
 
-                        <th:block th:each="tempCategory, i : ${categories}">
+                        <th:block th:each="tempCategory, i : ${categories}" th:object="${checkedCategories}">
                             <th:block th:if="${i.index} == 3">
                                 <br>
                             </th:block>
 
-                            <input type="checkbox" name="checkedCategory" th:value="${tempCategory.id}">
+
+                            <input type="checkbox" name="checkedCategory" th:value="${tempCategory.id}" th:checked="${checkedCategories.contains(tempCategory.description)}">
+
                             <label th:text="${tempCategory.description}"></label>
                         </th:block>
+
                     </div>
 
 
@@ -155,8 +160,15 @@
 <!--RECIPE INGREDIENTS-->
 <div class="container mt-5">
     <div class="card border-primary card-style">
-        <h5 class="card-header bg-primary">Ingredients</h5>
-            <div class="card-body" th:object="${ingredient}">
+        <h5 class="card-header bg-primary">
+            Ingredients
+            <!--  todo add view ingredient functionality -->
+            <span class="float-right"><a href="#" style="color:floralwhite" th:if="${recipe.ingredients.size()} > 0">Edit Ingredients</a></span>
+        </h5>
+
+            <!-- ONLY SHOW THIS DIV IF USER IS ADDING NEW RECIPE       -->
+            <div class="card-body" th:object="${ingredient}" th:if="${recipe.ingredients.size()} == 0">
+
 
                 <div class="row mt-1 mb-2 text-center">
                     <div class="col-md-3 p-2">
@@ -172,19 +184,8 @@
 
                     <div class="col-md-3 p-2">
                         <h5>UOM:</h5>
-<!--                        <select id="uom-list" class="form-control" >-->
-<!--                            <option value="ounce" >Ounce</option>-->
-<!--                            <option value="each">Each</option>-->
-<!--                            <option value="tablespoon">Tablespoon</option>-->
-<!--                            <option value="teaspoon">Teaspoon</option>-->
-<!--                            <option value="pinch">Pinch</option>-->
-<!--                            <option value="dash">Dash</option>-->
-<!--                            <option value="pound">Pound</option>-->
-<!--                            <option value="pint">Pint</option>-->
-<!--                            <option value="cup">Cup</option>-->
-<!--                        </select>-->
 
-                        <select class="form-control" name="uom.id" id="list">
+                        <select class="form-control" id="list">
                             <option
                                     th:each="uomTemp : ${uomList}"
                                     th:value="${uomTemp.id}"
@@ -194,18 +195,6 @@
                                     >
                             </option>
                         </select>
-
-
-
-<!--                        <th:block th:each="tempCategory, i : ${categories}">-->
-<!--                            <th:block th:if="${i.index} == 3">-->
-<!--                                <br>-->
-<!--                            </th:block>-->
-
-<!--                            <input type="checkbox" name="checkedCategory" th:value="${tempCategory.id}">-->
-<!--                            <label th:text="${tempCategory.description}"></label>-->
-<!--                        </th:block>-->
-
 
                     </div>
 
@@ -257,13 +246,37 @@
 
 <script>
 
+    /*<![CDATA[*/
+
+
+    /*]]>*/
+
+
+
     ingredients = [];
 
     $(document).ready(function () {
 
-        $("#form").submit(function (event) {
+        $('#form').submit(function (event) {
 
-            fire_ajax_submit();
+            event.preventDefault();
+            event.returnValue = false;
+
+            let $form = $(this);
+
+            $.ajax({
+                type: "POST",
+                url: "/saveIngredients",
+                context: $form,
+                contentType: "application/json",
+                dataType: 'json',
+                data: JSON.stringify(ingredients),
+                complete: function () {
+                    this.off('submit');
+                    this.submit();
+                }
+            });
+
 
         });
 
@@ -272,44 +285,27 @@
 
     function addIngredient() {
 
-        let uomList = document.getElementById("list").value;
+        let uomValue = document.getElementById("list");
         let ingredientAmount = document.getElementById("ingredient-amount").value;
         let ingredientDescription = document.getElementById("ingredient-description").value;
 
-        let uom = {"description" : "cup"}
+        //make an Ingredient Object
+        let uom = {"description" : "cup"};
         let ingredient = {"ingredientDescription" : ingredientDescription, "amount" : ingredientAmount , "uom" : uom };
 
-
-
         ingredients.push(ingredient);
-        console.log(ingredient);
 
-        let node = document.createElement("LI");
-        node.classList.add("list-group-item");
+        console.log(uomValue.name);
 
-        // let textNode = document.createTextNode(uomList);
-        let textNode = document.createTextNode(ingredient.amount + " " + ingredient.uom.description + " " + ingredient.ingredientDescription);
 
-        node.appendChild(textNode);
+        let node = document.createElement("LI"); //make li node
+        node.classList.add("list-group-item");  // add bootstrap class
+        let textNode = document.createTextNode(ingredient.amount + " " + "fix me" + " " + ingredient.ingredientDescription);  //how user sees list item
+
+        node.appendChild(textNode); // add text to node
         document.getElementById("ingredient-list").appendChild(node);
 
     }
-
-
-    function fire_ajax_submit() {
-        let uom = {"description" : "cup"}
-        let ingredient = {"ingredientDescription" : "sugar", "amount" : "3" , uom};
-
-
-        $.ajax({
-            type: "POST",
-            url: "/saveIngredients",
-            contentType: "application/json",
-            dataType: 'json',
-            data: JSON.stringify(ingredients),
-        });
-    }
-
 
 
 
