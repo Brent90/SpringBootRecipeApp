@@ -8,6 +8,7 @@ import com.slinger.recipeapp.repositories.UnitOfMeasureRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -39,5 +40,16 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
         UnitOfMeasure detachedUom = unitOfMeasureCommandToUnitOfMeasure.convert(unitOfMeasureCommand);
         UnitOfMeasure savedUom = unitOfMeasureRepository.save(detachedUom);
         return uomConverter.convert(savedUom);
+    }
+
+    @Override
+    public UnitOfMeasureCommand findByDescription(String description) {
+        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription(description);
+
+        if(!unitOfMeasureOptional.isPresent()) {
+            throw new RuntimeException("Not uom found with description: " + description);
+        }
+
+        return uomConverter.convert(unitOfMeasureOptional.get());
     }
 }

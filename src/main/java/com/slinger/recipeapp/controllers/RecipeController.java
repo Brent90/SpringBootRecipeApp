@@ -45,7 +45,6 @@ public class RecipeController {
     public String showRecipeById(@PathVariable String recipeId, Model model) {
         RecipeCommand recipeCommand = recipeService.findByRecipeCommandId(Long.valueOf(recipeId));
         model.addAttribute("recipe", recipeCommand);
-
         return "recipe/show";
     }
 
@@ -69,15 +68,14 @@ public class RecipeController {
         model.addAttribute("uomList", unitOfMeasureService.listAllUom());
 
 
-//        used for check boxes
+//        used to prepopulate checkboxes
         Set<String> checked = new HashSet<>();
         for(CategoryCommand cat : recipeCommand.getCategories()) {
             checked.add(cat.getDescription());
         }
 
-        model.addAttribute("checkedCategories", checked); //todo
-        System.out.println(categoryService.findDescriptions());
-        model.addAttribute("categories", categoryService.findAll()); //todo
+        model.addAttribute("checkedCategories", checked);
+        model.addAttribute("categories", categoryService.findAll());
 
         return "recipe/recipe-form";
     }
@@ -114,9 +112,9 @@ public class RecipeController {
         ingredientCommandSet.clear();
 
         for(IngredientCommand ingredientCommand : object) {
-            //save uom to get id
-            UnitOfMeasureCommand savedUOM = unitOfMeasureService.saveUnitOfMeasureCommand(ingredientCommand.getUom());
-            ingredientCommand.setUom(savedUOM);
+
+            UnitOfMeasureCommand uom = unitOfMeasureService.findByDescription(ingredientCommand.getUom().getDescription());
+            ingredientCommand.setUom(uom);
 
             //save ingredient to get id
             IngredientCommand savedIngredientCommand = ingredientService.saveIngredientCommand(ingredientCommand);

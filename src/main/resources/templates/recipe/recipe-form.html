@@ -171,10 +171,6 @@
 
 
                 <div class="row mt-1 mb-2 text-center">
-                    <div class="col-md-3 p-2">
-                        <h5>Description:</h5>
-                        <input type="text" id="ingredient-description" class="form-control" th:field="*{ingredientDescription}"/>
-                    </div>
 
                     <div class="col-md-3 p-2">
                         <h5>Amount:</h5>
@@ -188,7 +184,7 @@
                         <select class="form-control" id="list">
                             <option
                                     th:each="uomTemp : ${uomList}"
-                                    th:value="${uomTemp.id}"
+                                    th:value="${uomTemp.description}"
                                     th:text="${uomTemp.description}"
                                     th:name="${uomTemp.description}"
                                     th:selected="${uomTemp.id.equals(ingredient.id)}"
@@ -197,6 +193,12 @@
                         </select>
 
                     </div>
+
+                    <div class="col-md-3 p-2">
+                        <h5>Description:</h5>
+                        <input type="text" id="ingredient-description" class="form-control" th:field="*{ingredientDescription}"/>
+                    </div>
+
 
                     <div class="col-md-3 p-2">
                         <h5>Add:</h5>
@@ -290,17 +292,14 @@
         let ingredientDescription = document.getElementById("ingredient-description").value;
 
         //make an Ingredient Object
-        let uom = {"description" : "cup"};
+        let uom = {"description" : uomValue.value};
         let ingredient = {"ingredientDescription" : ingredientDescription, "amount" : ingredientAmount , "uom" : uom };
 
         ingredients.push(ingredient);
 
-        console.log(uomValue.name);
-
-
         let node = document.createElement("LI"); //make li node
         node.classList.add("list-group-item");  // add bootstrap class
-        let textNode = document.createTextNode(ingredient.amount + " " + "fix me" + " " + ingredient.ingredientDescription);  //how user sees list item
+        let textNode = document.createTextNode(ingredient.amount + " " + uom.description + " " + ingredient.ingredientDescription);  //how user sees list item
 
         node.appendChild(textNode); // add text to node
         document.getElementById("ingredient-list").appendChild(node);
