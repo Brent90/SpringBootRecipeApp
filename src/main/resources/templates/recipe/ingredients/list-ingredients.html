@@ -38,6 +38,8 @@
 
         <h5 class="card-header bg-primary">
             <span th:text="'My Recipes'">Ingredients</span>
+
+<!--            todo add new ingredient-->
             <span class="float-right"><a href=""  style="color:floralwhite">New Ingredient</a></span>
         </h5>
 
@@ -71,6 +73,13 @@
                 </tr>
 
 <!--                todo add thymeleaf logic to loop through-->
+                <tr th:each="ingredient : ${recipe.ingredients}">
+                    <td th:text="${ingredient.id}"></td>
+                    <td th:text="${ingredient.ingredientDescription}"></td>
+                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/show'}">view</a></td>
+                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/update'}">update</a></td>
+                    <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id} + '/delete'}">delete</a></td>
+                </tr>
 
                 </tbody>
 
