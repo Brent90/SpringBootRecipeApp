@@ -108,6 +108,14 @@ public class IngredientServiceImpl implements IngredientService {
                         .filter(ingredient -> ingredient.getId().equals(ingredientCommand.getId()))
                         .findFirst();
 
+            if(!savedIngredientOptional.isPresent()){ //set new ingrdient
+                savedIngredientOptional = savedRecipe.getIngredients().stream()
+                        .filter(recipeIngredients -> recipeIngredients.getIngredientDescription().equals(ingredientCommand.getIngredientDescription()))
+                        .filter(recipeIngredients -> recipeIngredients.getAmount().equals(ingredientCommand.getAmount()))
+                        .filter(recipeIngredients -> recipeIngredients.getUom().getId().equals(ingredientCommand.getUom().getId()))
+                        .findFirst();
+            }
+
 
                 return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
         }

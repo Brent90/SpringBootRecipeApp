@@ -1,6 +1,9 @@
 package com.slinger.recipeapp.controllers;
 
 import com.slinger.recipeapp.commands.IngredientCommand;
+import com.slinger.recipeapp.commands.RecipeCommand;
+import com.slinger.recipeapp.commands.UnitOfMeasureCommand;
+import com.slinger.recipeapp.domain.Recipe;
 import com.slinger.recipeapp.services.IngredientService;
 import com.slinger.recipeapp.services.RecipeService;
 import com.slinger.recipeapp.services.UnitOfMeasureService;
@@ -44,6 +47,19 @@ public class IngredientController {
         model.addAttribute("ingredient", ingredientService.findIngredientByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
         model.addAttribute("uomList", unitOfMeasureService.listAllUom());
         model.addAttribute("recipe", recipeService.findByRecipeCommandId(Long.valueOf(recipeId)));
+        return "recipe/ingredients/ingredient-form";
+    }
+
+    @GetMapping("recipe/{recipeId}/ingredient")
+    public String addNewIngredient(@PathVariable String recipeId, Model model) {
+        RecipeCommand recipeCommand = recipeService.findByRecipeCommandId(Long.valueOf(recipeId));
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(recipeCommand.getId());
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+
+        model.addAttribute("ingredient", ingredientCommand);
+        model.addAttribute("uomList", unitOfMeasureService.listAllUom());
+
         return "recipe/ingredients/ingredient-form";
     }
 

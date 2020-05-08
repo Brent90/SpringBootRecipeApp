@@ -40,7 +40,7 @@
             <span>Ingredients</span>
 
 <!--            todo add new ingredient-->
-            <span class="float-right"><a href=""  style="color:floralwhite">New Ingredient</a></span>
+            <span class="float-right"><a href="" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient'}" style="color:floralwhite">New Ingredient</a></span>
         </h5>
 
 

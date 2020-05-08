@@ -13,6 +13,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -103,5 +105,19 @@ class IngredientControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/2/ingredient/1/show"));
 
+    }
+
+    @Test
+    void addNewIngredient() throws Exception {
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1L);
+
+        when(recipeService.findByRecipeCommandId(anyLong())).thenReturn(recipeCommand);
+        when(unitOfMeasureService.listAllUom()).thenReturn(new HashSet<>());
+
+        mockMvc.perform(get("/recipe/1/ingredient"))
+                .andExpect(model().attributeExists("ingredient"))
+                .andExpect(model().attributeExists("uomList"))
+                .andExpect(view().name("recipe/ingredients/ingredient-form"));
     }
 }
