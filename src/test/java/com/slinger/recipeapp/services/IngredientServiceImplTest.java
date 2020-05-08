@@ -25,6 +25,7 @@ class IngredientServiceImplTest {
 
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
+    private final UnitOfMeasureCommandToUnitOfMeasure uomConverter;
 
     @Mock
     RecipeRepository recipeRepository;
@@ -42,13 +43,15 @@ class IngredientServiceImplTest {
     public IngredientServiceImplTest() {
         this.ingredientToIngredientCommand = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
         this.ingredientCommandToIngredient = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
+        uomConverter = new UnitOfMeasureCommandToUnitOfMeasure();
+
     }
 
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient, ingredientRepository, recipeRepository);
+        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient, ingredientRepository, recipeRepository, unitOfMeasureRepository, uomConverter);
 
     }
 
