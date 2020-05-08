@@ -16,7 +16,9 @@
             th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
 
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
 
     <style th:remove="all">
         .card-style {
@@ -155,8 +157,6 @@
     </div>
 
 
-<!--TODO ADD INGREDIENT FUNCTIONALITY -->
-
 <!--RECIPE INGREDIENTS-->
 <div class="container mt-5">
     <div class="card border-primary card-style">
@@ -203,7 +203,7 @@
 
                     <div class="col-md-3 p-2">
                         <h5>Add:</h5>
-                        <button type="button" onclick="addIngredient()"  class="btn btn-primary">Add Ingredient</button>
+                        <button type="button" onclick="addIngredient(); clearInput()"  class="btn btn-primary">Add Ingredient</button>
                     </div>
                 </div>
 
@@ -249,58 +249,57 @@
 
 <script>
 
-    //todo put this in a js file
-
-    ingredients = [];
-
-    $(document).ready(function () {
-
-        $('#form').submit(function (event) {
-
-            event.preventDefault();
-            event.returnValue = false;
-
-            let $form = $(this);
-
-            $.ajax({
-                type: "POST",
-                url: "/saveIngredients",
-                context: $form,
-                contentType: "application/json",
-                dataType: 'json',
-                data: JSON.stringify(ingredients),
-                complete: function () {
-                    this.off('submit');
-                    this.submit();
-                }
-            });
-
-
-        });
-
-    });
-
-
-    function addIngredient() {
-
-        let uomValue = document.getElementById("list");
-        let ingredientAmount = document.getElementById("ingredient-amount").value;
-        let ingredientDescription = document.getElementById("ingredient-description").value;
-
-        //make an Ingredient Object
-        let uom = {"description" : uomValue.value};
-        let ingredient = {"ingredientDescription" : ingredientDescription, "amount" : ingredientAmount , "uom" : uom };
-
-        ingredients.push(ingredient);
-
-        let node = document.createElement("LI"); //make li node
-        node.classList.add("list-group-item");  // add bootstrap class
-        let textNode = document.createTextNode(ingredient.amount + " " + uom.description + " " + ingredient.ingredientDescription);  //how user sees list item
-
-        node.appendChild(textNode); // add text to node
-        document.getElementById("ingredient-list").appendChild(node);
-
-    }
+    //
+    // ingredients = [];
+    //
+    // $(document).ready(function () {
+    //
+    //     $('#form').submit(function (event) {
+    //
+    //         event.preventDefault();
+    //         event.returnValue = false;
+    //
+    //         let $form = $(this);
+    //
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "/saveIngredients",
+    //             context: $form,
+    //             contentType: "application/json",
+    //             dataType: 'json',
+    //             data: JSON.stringify(ingredients),
+    //             complete: function () {
+    //                 this.off('submit');
+    //                 this.submit();
+    //             }
+    //         });
+    //
+    //
+    //     });
+    //
+    // });
+    //
+    //
+    // function addIngredient() {
+    //
+    //     let uomValue = document.getElementById("list");
+    //     let ingredientAmount = document.getElementById("ingredient-amount").value;
+    //     let ingredientDescription = document.getElementById("ingredient-description").value;
+    //
+    //     //make an Ingredient Object
+    //     let uom = {"description" : uomValue.value};
+    //     let ingredient = {"ingredientDescription" : ingredientDescription, "amount" : ingredientAmount , "uom" : uom };
+    //
+    //     ingredients.push(ingredient);
+    //
+    //     let node = document.createElement("LI"); //make li node
+    //     node.classList.add("list-group-item");  // add bootstrap class
+    //     let textNode = document.createTextNode(ingredient.amount + " " + uom.description + " " + ingredient.ingredientDescription);  //how user sees list item
+    //
+    //     node.appendChild(textNode); // add text to node
+    //     document.getElementById("ingredient-list").appendChild(node);
+    //
+    // }
 
 
 
