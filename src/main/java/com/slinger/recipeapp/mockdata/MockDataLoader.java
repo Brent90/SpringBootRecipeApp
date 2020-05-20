@@ -7,7 +7,6 @@ import com.slinger.recipeapp.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import sun.util.resources.et.CalendarData_et;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class MockDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.debug("Loading data...");
+        log.debug("Loading data....");
         recipeRepository.saveAll(getRecipes());
     }
 
