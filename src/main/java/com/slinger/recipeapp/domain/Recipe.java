@@ -30,6 +30,8 @@ public class Recipe {
 
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
+
+    @Lob
     private Byte[] image;
 
     @OneToOne(cascade = CascadeType.ALL)  //delete a recipe then delete recipe notes

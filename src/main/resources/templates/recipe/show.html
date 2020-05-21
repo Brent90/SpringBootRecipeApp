@@ -44,8 +44,8 @@
 
         <div class="card-body">
             <div class="text-center">
-                <img src="../../static/images/holder.png" th:src="@{/images/holder.png}"
-                     alt="holder image" width="800" height="300" class="img-fluid"
+                <img th:if="${recipe.getImage()} != null" src="../../static/images/holder.png" th:src="@{'/recipe/' + ${recipe.id} + '/loadImage'}"
+                     alt="image of meal" width="800" height="300" class="img-fluid"
                      style="height: 300px !important;">
             </div>
 

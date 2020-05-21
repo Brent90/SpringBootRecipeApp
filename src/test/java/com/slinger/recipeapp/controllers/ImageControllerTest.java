@@ -38,7 +38,7 @@ class ImageControllerTest {
 
         when(recipeService.findByRecipeCommandId(1L)).thenReturn(recipeCommand);
 
-        mockMvc.perform(get("/recipe/1/image"))
+        mockMvc.perform(get("/recipe/1/showImageForm"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("recipe"))
                 .andExpect(view().name("recipe/image-form"));

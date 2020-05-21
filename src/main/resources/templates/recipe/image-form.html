@@ -42,9 +42,9 @@
         </h5>
 
         <div class="card-body">
-                <form>
+                <form th:action="@{'/recipe/' + ${recipe.id} + '/image'}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="file" class="form-control-file" id="image-upload">
+                        <input type="file" class="form-control-file" id="image-file" name="image-file">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Upload</button>
