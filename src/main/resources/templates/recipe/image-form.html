@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Form</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+
+    <script crossorigin="anonymous" src="https://code.jquery.com/jquery-3.0.0.slim.min.js"
+            th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            th:src="@{/webjars/popper.js/1.14.3/umd/popper.min.js}"></script>
+    <script crossorigin="anonymous" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <style th:remove="all">
+        .card-style {
+            width: 85%;
+            margin: auto;
+        }
+
+        .card-header {
+            color: floralwhite;
+        }
+    </style>
+
+</head>
+<body>
+
+
+<div class="container mt-5">
+    <div class="card border-primary card-style">
+
+        <h5 class="card-header bg-primary">
+            <span th:text="'My Recipes'">Upload Image</span>
+            <span class="float-right"><a href=""  style="color:floralwhite">Go Back</a></span>
+        </h5>
+
+        <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" id="image-upload">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Upload</button>
+
+                </form>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
