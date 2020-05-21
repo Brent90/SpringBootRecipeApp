@@ -39,13 +39,11 @@
 
          <h5 class="card-header bg-primary">
              <span th:text="${recipe.description}">Description</span>
-            <!--  todo add upload image functionality-->
-             <span class="float-right"><a href=""  style="color:floralwhite">Upload Image</a></span>
+             <span class="float-right"><a href="" th:href="@{/}" style="color:floralwhite">Go Back</a></span>
          </h5>
 
         <div class="card-body">
             <div class="text-center">
-            <!--  todo add image functionality  -->
                 <img src="../../static/images/holder.png" th:src="@{/images/holder.png}"
                      alt="holder image" width="800" height="300" class="img-fluid"
                      style="height: 300px !important;">
