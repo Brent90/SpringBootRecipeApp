@@ -44,10 +44,11 @@
         <div class="card-body">
                 <form th:action="@{'/recipe/' + ${recipe.id} + '/image'}" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="file" class="form-control-file" id="image-file" name="image-file">
+                        <input type="file" class="form-control-file" id="image-file" name="image-file" onchange="return isFileImage()" >
+                        <small class="text-danger" id="image-error" style="display: none">Please Upload An Image</small>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <button type="submit" onclick="return validateFile()" class="btn btn-primary">Upload</button>
 
                 </form>
         </div>
@@ -56,6 +57,34 @@
     </div>
 </div>
 
+
+<script>
+
+    function validateFile() {
+        let file = document.getElementById('image-file').value;
+        if(file.length == 0) {
+            document.getElementById('image-error').style.display = 'block';
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    function isFileImage() {
+        const fileInput = document.getElementById('image-file');
+        const filePath = fileInput.value;
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+        if(!allowedExtensions.exec(filePath)){
+            alert('Please upload file having extensions .jpeg/.jpg/.png only.');
+            fileInput.value = '';
+            return false;
+        }else{
+            document.getElementById('image-error').style.display = 'none';
+            return true;
+        }
+    }
+
+</script>
 
 
 </body>
